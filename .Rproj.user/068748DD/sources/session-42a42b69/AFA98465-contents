@@ -59,3 +59,37 @@ unemp_top_increases_no_covid <- unemp_no_2020 |>
 unemp_top_decreases_no_covid <- unemp_no_2020 |>
   slice_min(unemployment_rate_change, n=5)
 
+ggplot(unemp, aes(x = date, y = unemployment_rate, color = region)) +
+  geom_line() + 
+  facet_wrap(~ region) +
+  labs(
+    title = "Unemployment Rates by Region", x = "Date", y = "Unemployment Rate", color = "Region") +
+  theme_minimal()
+
+ggplot(unemp_summary, aes(x = forcats::fct_reorder(region, mean_unemployment_rate), y = mean_unemployment_rate, fill = region)) +
+  geom_col() +
+  labs(
+    title = "Average Unemployment Rate by Region",
+    x = "Region",
+    y = "Mean Unemployment Rate",
+    fill = "Region"
+  ) +
+  theme_minimal()
+
+unemp_summary <- unemp |>
+  group_by(region) |>
+  summarize(mean_unemployment_rate = mean(unemployment_rate, na.rm = TRUE))
+
+unemp_summary <- unemp |>
+  group_by(region) |>
+  summarize(mean_unemployment_rate = mean(unemployment_rate, na.rm = TRUE))
+
+ggplot(unemp_summary, aes(x = forcats::fct_reorder(region, mean_unemployment_rate), y = mean_unemployment_rate, fill = region)) +
+  geom_col() +
+  labs(
+    title = "Average Unemployment Rate by Region",
+    x = "Region",
+    y = "Mean Unemployment Rate",
+    fill = "Region"
+  ) +
+  theme_minimal()
