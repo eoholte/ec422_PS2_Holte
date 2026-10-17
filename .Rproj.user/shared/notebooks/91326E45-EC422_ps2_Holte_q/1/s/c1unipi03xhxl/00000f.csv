@@ -1,0 +1,8 @@
+"0","#| message: false"
+"0","#| warning: false"
+"0",""
+"0","# Load knitr for kable formatting"
+"0","library(knitr)"
+"0",""
+"0","# Table 1: Summary of average unemployment rates by region"
+"0","kable(unemp_summary, caption = ""Average Unemployment Rate by Region"")"

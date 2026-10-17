@@ -1,0 +1,8 @@
+"0","#| message: false"
+"0","#| warning: false"
+"0","library(tidyverse)"
+"0","library(tidyquant)"
+"0","library(knitr)"
+"0",""
+"0","unemp_raw <- read_rds(""data/unemp_raw.rds"")"
+"0","head(unemp_raw)"

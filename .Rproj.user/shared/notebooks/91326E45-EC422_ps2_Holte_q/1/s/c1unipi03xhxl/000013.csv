@@ -1,0 +1,3 @@
+"0",""
+"0","# Table 3: Top 5 month-over-month decreases (excluding 2020)"
+"0","kable(unemp_top_decreases_no_covid, caption = ""Top 5 Month-over-Month Decreases (Excluding 2020)"")"

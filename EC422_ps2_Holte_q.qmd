@@ -1,0 +1,98 @@
+---
+title: "Problem Set 2"
+author: "Emmett Holte"
+date: "10/16/2026""
+format:
+html:
+  toc: true
+  embed-resources: true
+---
+
+https://github.com/eoholte/ec422_PS2_Holte
+
+## 1. Data
+
+The data used in this assignment comes from the FRED database, covering monthly unemployment rates for four states and the US from 1976 to 2025.
+---
+
+```{r}
+#| message: false
+#| warning: false
+library(tidyverse)
+library(tidyquant)
+library(knitr)
+
+unemp_raw <- read_rds("data/unemp_raw.rds")
+head(unemp_raw)
+```
+
+```{r}
+#| message: false
+#| warning: false
+
+# Load knitr for kable formatting
+library(knitr)
+
+# Table 1: Summary of average unemployment rates by region
+kable(unemp_summary, caption = "Average Unemployment Rate by Region")
+
+# Table 2: Top 5 month-over-month increases (excluding 2020)
+kable(unemp_top_increases_no_covid, caption = "Top 5 Month-over-Month Increases (Excluding 2020)")
+
+# Table 3: Top 5 month-over-month decreases (excluding 2020)
+kable(unemp_top_decreases_no_covid, caption = "Top 5 Month-over-Month Decreases (Excluding 2020)")
+```
+
+```{r}
+#| message: false
+#| warning: false
+
+# 5.1 Line Plot
+ggplot(unemp, aes(x = date, y = unemployment_rate, color = region)) +
+  geom_line() +
+  labs(
+    title = "Unemployment Rates by Region",
+    x = "Date",
+    y = "Unemployment Rate (%)",
+    color = "Region"
+  ) +
+  theme_minimal()
+
+# 5.2 Faceted Line Plot
+ggplot(unemp, aes(x = date, y = unemployment_rate, color = region)) +
+  geom_line() +
+  facet_wrap(~ region) +
+  labs(
+    title = "Unemployment Rates by Region (Faceted)",
+    x = "Date",
+    y = "Unemployment Rate (%)",
+    color = "Region"
+  ) +
+  theme_minimal()
+
+# 5.3 Bar Chart
+ggplot(unemp_summary, aes(x = forcats::fct_reorder(region, mean_unemployment_rate), y = mean_unemployment_rate, fill = region)) +
+  geom_col() +
+  labs(
+    title = "Average Unemployment Rate by Region",
+    x = "Region",
+    y = "Mean Unemployment Rate (%)",
+    fill = "Region"
+  ) +
+  theme_minimal()
+
+# 5.4 Custom Plot
+ggplot(unemp, aes(x = date, y = unemployment_rate_change, color = region)) +
+  geom_line(alpha = 0.5) +
+  labs(
+    title = "Monthly Changes in Unemployment Rates",
+    x = "Date",
+    y = "Rate Change",
+    color = "Region"
+  ) +
+  theme_minimal()
+```
+
+## 4. Reflection
+
+In this assignment I had to re-familiarize myself with r and ggplot. It has been months since I had last used it so it took some time to get back into the swing of things. Having copilot on my side was helpful for sure, that isn't something i had used in the past and it was a nigh and day difference. I think now I am a lot more comfortable navigating git and committing regularly.
